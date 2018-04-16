@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Loja Comercial</string>
+    <string name="cotacoes_dia">Cotações do Dia</string>
 </resources>
