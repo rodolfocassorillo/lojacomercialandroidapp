@@ -26,7 +26,7 @@ public class BuscarCotacoesJson extends AsyncTask<String,Integer,String> {
     Activity activity;
     ProgressBar progressBar;
 
-    public BuscarCotacoesJson(CotacoesDia activity){
+    public BuscarCotacoesJson(Activity activity){
         this.activity = activity;
     }
 
@@ -41,16 +41,35 @@ public class BuscarCotacoesJson extends AsyncTask<String,Integer,String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         Gson gson = new Gson();
-        //List<Cotacao> cotacoes = gson.fromJson(s, new TypeToken<List<Cotacao>>(){}.getType());
         Cotacao cotacoes = gson.fromJson(s, Cotacao.class);
         Log.i("BuscarCotacoes",""+cotacoes);
+        if (cotacoes != null){
         TextView nomeMoeda = (TextView) activity.findViewById(R.id.txNomeMoeda);
         TextView valorMoeda = (TextView) activity.findViewById(R.id.txValorMoeda);
+        TextView nomeMoedaEuro = (TextView) activity.findViewById(R.id.txNomeMoedaEuro);
+        TextView valorMoedaEuro = (TextView) activity.findViewById(R.id.txValorMoedaEuro);
+        TextView nomeMoedaBTC = (TextView) activity.findViewById(R.id.txNomeMoedaBTC);
+        TextView valorMoedaBTC = (TextView) activity.findViewById(R.id.txValorMoedaBTC);
         nomeMoeda.setText(cotacoes.getValores().getUSD().getNome());
         valorMoeda.setText(cotacoes.getValores().getUSD().getValor());
-        //AdapterCotacao adapterCotacao = new AdapterCotacao(activity, cotacoes);
-        //ListView listView = (ListView) activity.findViewById(R.id.listViewCotacoes);
-        //listView.setAdapter(adapterCotacao);
+        nomeMoedaEuro.setText(cotacoes.getValores().getEUR().getNome());
+        valorMoedaEuro.setText(cotacoes.getValores().getEUR().getValor());
+        nomeMoedaBTC.setText(cotacoes.getValores().getBTC().getNome());
+        valorMoedaBTC.setText(cotacoes.getValores().getBTC().getValor());
+        }else{
+            TextView nomeMoeda = (TextView) activity.findViewById(R.id.txNomeMoeda);
+            TextView valorMoeda = (TextView) activity.findViewById(R.id.txValorMoeda);
+            TextView nomeMoedaEuro = (TextView) activity.findViewById(R.id.txNomeMoedaEuro);
+            TextView valorMoedaEuro = (TextView) activity.findViewById(R.id.txValorMoedaEuro);
+            TextView nomeMoedaBTC = (TextView) activity.findViewById(R.id.txNomeMoedaBTC);
+            TextView valorMoedaBTC = (TextView) activity.findViewById(R.id.txValorMoedaBTC);
+            nomeMoeda.setText("Dólar");
+            valorMoeda.setText("0");
+            nomeMoedaEuro.setText("Euro");
+            valorMoedaEuro.setText("0");
+            nomeMoedaBTC.setText("BitCoin");
+            valorMoedaBTC.setText("0");
+        }
         progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -63,7 +82,6 @@ public class BuscarCotacoesJson extends AsyncTask<String,Integer,String> {
     protected String doInBackground(String... strings) {
         String jsonRetorno = null;
         try{
-            //URL url = new URL("http://www.android.com/");
             URL url = new URL(strings[0]);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             InputStream stream = null;
@@ -73,8 +91,6 @@ public class BuscarCotacoesJson extends AsyncTask<String,Integer,String> {
             } finally {
                 urlConnection.disconnect();
             }
-
-            //InputStream stream = url.openStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
             StringBuilder builder = new StringBuilder();
             String linha;

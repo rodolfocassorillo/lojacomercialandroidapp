@@ -22,7 +22,7 @@ public class CotacaoAtual extends AsyncTask<String,Integer,String> {
     Activity activity;
     ProgressBar progressBar;
 
-    public CotacaoAtual(CotacoesDia activity){
+    public CotacaoAtual(Activity activity){
         this.activity = activity;
     }
 
@@ -38,9 +38,6 @@ public class CotacaoAtual extends AsyncTask<String,Integer,String> {
         super.onPostExecute(s);
         Gson gson = new Gson();
         List<Cotacao> cotacoes = gson.fromJson(s, new TypeToken<List<Cotacao>>(){}.getType());
-        //AdapterCotacao adapterCotacao = new AdapterCotacao(activity, cotacoes);
-        //ListView listView = (ListView) activity.findViewById(R.id.listViewCotacoes);
-        //listView.setAdapter(adapterCotacao);
         progressBar.setVisibility(View.INVISIBLE);
     }
 

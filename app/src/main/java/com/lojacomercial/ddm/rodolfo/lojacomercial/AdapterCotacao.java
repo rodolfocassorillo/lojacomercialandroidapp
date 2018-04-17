@@ -37,14 +37,31 @@ public class AdapterCotacao extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View viewLinha = LayoutInflater.from(context).inflate(R.layout.linha_cotacoes, parent, false);
-        ImageView imagemValor = (ImageView) viewLinha.findViewById(R.id.imageLogo);
-        TextView nomeMoeda = (TextView) viewLinha.findViewById(R.id.txNomeMoeda);
-        TextView valorMoeda = (TextView) viewLinha.findViewById(R.id.txValorMoeda);
+        View viewLinha = LayoutInflater.from(context).inflate(R.layout.activity_main, parent, false);
+        //ImageView imagemUSD = (ImageView) viewLinha.findViewById(R.id.imageDollar);
+        TextView nomeMoedaDollar = (TextView) viewLinha.findViewById(R.id.txNomeMoeda);
+        TextView valorMoedaDollar = (TextView) viewLinha.findViewById(R.id.txValorMoeda);
+        TextView nomeMoedaEUR = (TextView) viewLinha.findViewById(R.id.txNomeMoedaEuro);
+        TextView valorMoedaEUR = (TextView) viewLinha.findViewById(R.id.txValorMoedaEuro);
+        TextView nomeMoedaBTC = (TextView) viewLinha.findViewById(R.id.txNomeMoedaBTC);
+        TextView valorMoedaBTC = (TextView) viewLinha.findViewById(R.id.txValorMoedaBTC);
         Cotacao cotacao = cotacoes.get(position);
-        imagemValor.setImageResource(cotacao.getValores().getUSD().getImagem());
-        nomeMoeda.setText(cotacao.getValores().getUSD().getNome());
-        valorMoeda.setText(cotacao.getValores().getUSD().getValor().toString());
+        //imagemUSD.setImageResource(cotacao.getValores().getUSD().getImagem());
+        if(cotacao != null){
+            nomeMoedaDollar.setText(cotacao.getValores().getUSD().getNome());
+            valorMoedaDollar.setText(cotacao.getValores().getUSD().getValor().toString());
+            nomeMoedaEUR.setText(cotacao.getValores().getEUR().getNome());
+            valorMoedaEUR.setText(cotacao.getValores().getEUR().getValor().toString());
+            nomeMoedaBTC.setText(cotacao.getValores().getBTC().getNome());
+            valorMoedaBTC.setText(cotacao.getValores().getBTC().getValor().toString());
+        }else {
+            nomeMoedaDollar.setText("Dólar");
+            valorMoedaDollar.setText("0");
+            nomeMoedaEUR.setText("Euro");
+            valorMoedaEUR.setText("0");
+            nomeMoedaBTC.setText("BitCoin");
+            valorMoedaBTC.setText("0");
+        }
         return viewLinha;
     }
 
