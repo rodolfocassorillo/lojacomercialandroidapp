@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void chamarCotacoes(View view){
         Intent intent = new Intent(this,CotacoesDia.class);
-//        intent.putExtra("timeCampeao","Corithians");
-//        intent.putExtra("titulosBrasileiro", 10);
         startActivity(intent);
     }
 

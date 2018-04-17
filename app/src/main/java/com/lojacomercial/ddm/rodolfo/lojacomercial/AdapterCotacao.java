@@ -39,12 +39,12 @@ public class AdapterCotacao extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View viewLinha = LayoutInflater.from(context).inflate(R.layout.linha_cotacoes, parent, false);
         ImageView imagemValor = (ImageView) viewLinha.findViewById(R.id.imageLogo);
-        TextView nomeValor = (TextView) viewLinha.findViewById(R.id.txNomeCotacao);
-        TextView valorCotacao = (TextView) viewLinha.findViewById(R.id.txValorCotacao);
+        TextView nomeMoeda = (TextView) viewLinha.findViewById(R.id.txNomeMoeda);
+        TextView valorMoeda = (TextView) viewLinha.findViewById(R.id.txValorMoeda);
         Cotacao cotacao = cotacoes.get(position);
-        imagemValor.setImageResource(cotacao.getImagem());
-        nomeValor.setText(cotacao.getNome());
-        valorCotacao.setText(cotacao.getValor().toString());
+        imagemValor.setImageResource(cotacao.getValores().getUSD().getImagem());
+        nomeMoeda.setText(cotacao.getValores().getUSD().getNome());
+        valorMoeda.setText(cotacao.getValores().getUSD().getValor().toString());
         return viewLinha;
     }
 

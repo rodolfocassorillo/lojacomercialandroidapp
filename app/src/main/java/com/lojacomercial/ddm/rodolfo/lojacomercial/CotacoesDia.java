@@ -13,7 +13,8 @@ public class CotacoesDia extends AppCompatActivity {
         setContentView(R.layout.activity_cotacoes_dia);
 
         BuscarCotacoesJson buscarCotacoesJson = new BuscarCotacoesJson(CotacoesDia.this);
-        buscarCotacoesJson.execute("http://api.promasters.net.br/cotacao/v1/valores?moedas=USD,BTC&alt=json");
+        buscarCotacoesJson.execute("http://api.promasters.net.br/cotacao/v1/valores?moedas=USD&alt=json");
 
     }
+
 }
